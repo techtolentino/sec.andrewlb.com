@@ -2,15 +2,16 @@ import React from "react";
 import { StaticQuery, graphql } from "gatsby";
 import styled from "react-emotion";
 import Link from "./link";
-import './styles.css';
-import config from '../../config';
+import "./styles.css";
+import config from "../../config";
 
 const forcedNavOrder = config.sidebar.forcedNavOrder;
 
-const Sidebar = styled('aside')`
+const Sidebar = styled("aside")`
   width: 100%;
+  color: #000000;
   background-color: #fff;
-  border-right: 1px solid #ede7f3;
+  border-right: 1px solid #000000;
   height: 100vh;
   overflow: auto;
   position: fixed;
@@ -27,31 +28,27 @@ const Sidebar = styled('aside')`
 
 // eslint-disable-next-line no-unused-vars
 const ListItem = styled(({ className, active, level, ...props }) => {
-    return (
-      <li className={className}>
-        <a href={props.to} {...props} />
-      </li>
-    );
+  return (
+    <li className={className}>
+      <a href={props.to} {...props} />
+    </li>
+  );
 })`
   list-style: none;
 
   a {
-    color: #5C6975;
+    color: #000000;
     text-decoration: none;
     font-weight: ${({ level }) => (level === 0 ? 700 : 400)};
     padding: 0.45rem 0 0.45rem ${props => 2 + (props.level || 0) * 1}rem;
     display: block;
     position: relative;
 
-    &:hover {
-      color: rgb(116, 76, 188) !important;
-    }
-
     ${props =>
       props.active &&
       `
-      color: #663399;
-      border-color: rgb(230,236,241) !important;
+      color: #000000;
+      border-color: rgb(0,0,0) !important;
       border-style: solid none solid solid;
       border-width: 1px 0px 1px 1px;
       background-color: #fff;
@@ -85,21 +82,25 @@ const SidebarLayout = ({ location }) => (
       if (allMdx.edges !== undefined && allMdx.edges.length > 0) {
         const navItems = allMdx.edges.map((item, index) => {
           let innerItems;
-          if(item !== undefined) {
-            if ((item.node.fields.slug === location.pathname) || (config.gatsby.pathPrefix + item.node.fields.slug) === location.pathname) {
+          if (item !== undefined) {
+            if (
+              item.node.fields.slug === location.pathname ||
+              config.gatsby.pathPrefix + item.node.fields.slug ===
+                location.pathname
+            ) {
               if (item.node.tableOfContents.items) {
-                innerItems = item.node.tableOfContents.items.map((innerItem, index) => {
-                  const itemId = innerItem.title ? innerItem.title.replace(/\s+/g, '').toLowerCase() : '#';
-                  return (
-                    <ListItem
-                      key={index}
-                      to={`#${itemId}`}
-                      level={1}
-                    >
-                      {innerItem.title}
-                    </ListItem>
-                  );
-                });
+                innerItems = item.node.tableOfContents.items.map(
+                  (innerItem, index) => {
+                    const itemId = innerItem.title
+                      ? innerItem.title.replace(/\s+/g, "").toLowerCase()
+                      : "#";
+                    return (
+                      <ListItem key={index} to={`#${itemId}`} level={1}>
+                        {innerItem.title}
+                      </ListItem>
+                    );
+                  }
+                );
               }
             }
           }
@@ -112,8 +113,8 @@ const SidebarLayout = ({ location }) => (
       if (finalNavItems && finalNavItems.length) {
         return (
           <Sidebar>
-            <ul className={'rightSideBarUL'}>
-              <div className={'rightSideTitle'}>CONTENTS</div>
+            <ul className={"rightSideBarUL"}>
+              <div className={"rightSideTitle"}>CONTENTS</div>
               {finalNavItems}
             </ul>
           </Sidebar>
