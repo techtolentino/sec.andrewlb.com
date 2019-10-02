@@ -4,8 +4,6 @@ metaTitle: "Week 1"
 metaDescription: "Week 1"
 ---
 
-#
-
 Hey, great to meet everyone.
 
 I'm Andrew Lovett-Barron, Canadian/American currently living in Copenhagen. I studied political science at the University of Toronto, but have been working as a product designer and software developer for the past decade, including at IDEO (a global design firm) and the US Department of Defense as part of the Defense Digital Service. After that, I was a Public Interest Technology fellow at New America exploring social enterprise, which is partially responsible for my being in Denmark. I currently run my own software products and consult around Europe.
